@@ -2,14 +2,12 @@ name: Profile Checks
 
 on:
   push:
-    branches: [ master ]
     paths:
       - 'etc/**'
       - 'ci/check/profiles/**'
       - 'src/firecfg/firecfg.config'
       - 'contrib/sort.py'
   pull_request:
-    branches: [ master ]
     paths:
       - 'etc/**'
       - 'ci/check/profiles/**'
