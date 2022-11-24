@@ -41,7 +41,7 @@ alt="Deep Dive" width="240" height="142" border="10" /><br/>Deep Dive</a>
 
 </tr></table>
 
-Project webpage: https://firejail.wordpress.com/
+Project webpage: https://example.com/
 
 IRC: https://web.libera.chat/#firejail
 
