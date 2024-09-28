@@ -28,6 +28,9 @@ jobs:
       security-events: write
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      matrix:
+        language: [ python ]
 
     steps:
     - name: Harden Runner
@@ -53,9 +56,9 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@4dd16135b69a43b6c8efb853346f8437d92d3c93
       with:
-        languages: python
+        languages: ${{ matrix.language }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@4dd16135b69a43b6c8efb853346f8437d92d3c93
       with:
-        category: "/language:python"
+        category: "/language:${{ matrix.language }}"
