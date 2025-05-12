@@ -48,7 +48,7 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 
 jobs:
   test-main:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       SHELL: /bin/bash
@@ -68,12 +68,12 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        gcc-12 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
+        gcc-14 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=gcc-12
+        ./configure CC=gcc-14
         --prefix=/usr --enable-fatal-warnings --enable-analyzer
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)
@@ -97,7 +97,7 @@ jobs:
 #
 
   test-fs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       SHELL: /bin/bash
@@ -117,12 +117,12 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        gcc-12 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
+        gcc-14 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=gcc-12
+        ./configure CC=gcc-14
         --prefix=/usr --enable-fatal-warnings --enable-analyzer
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)
@@ -137,7 +137,7 @@ jobs:
     - run: make test-fs
 
   test-environment:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       SHELL: /bin/bash
@@ -157,12 +157,12 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        gcc-12 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
+        gcc-14 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=gcc-12
+        ./configure CC=gcc-14
         --prefix=/usr --enable-fatal-warnings --enable-analyzer
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)
@@ -177,7 +177,7 @@ jobs:
     - run: make test-profiles
 
   test-utils:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       SHELL: /bin/bash
@@ -200,12 +200,12 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        gcc-12 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
+        gcc-14 libapparmor-dev libselinux1-dev expect xzdec bridge-utils
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=gcc-12
+        ./configure CC=gcc-14
         --prefix=/usr --enable-fatal-warnings --enable-analyzer
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)
@@ -219,7 +219,7 @@ jobs:
     - run: make test-utils
 
   test-network:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
       SHELL: /bin/bash
@@ -246,13 +246,13 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        gcc-12 libapparmor-dev libselinux1-dev expect xzdec whois
+        gcc-14 libapparmor-dev libselinux1-dev expect xzdec whois
         bridge-utils
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=gcc-12
+        ./configure CC=gcc-14
         --prefix=/usr --enable-fatal-warnings --enable-analyzer
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)

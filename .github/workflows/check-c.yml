@@ -42,7 +42,7 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 
 jobs:
   scan-build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
     - name: Harden Runner
@@ -62,12 +62,12 @@ jobs:
     - name: install dependencies
       run: >
         sudo apt-get install -qy
-        clang-tools-14 libapparmor-dev libselinux1-dev
+        clang-tools-18 libapparmor-dev libselinux1-dev
     - name: print env
       run: ./ci/printenv.sh
     - name: configure
       run: >
-        ./configure CC=clang-14 SCAN_BUILD=scan-build-14
+        ./configure CC=clang-18 SCAN_BUILD=scan-build-18
         --prefix=/usr --enable-fatal-warnings
         --enable-apparmor --enable-selinux
         || (cat config.log; exit 1)
@@ -75,7 +75,7 @@ jobs:
       run: make -j "$(nproc)" scan-build
 
   cppcheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
     - name: Harden Runner
