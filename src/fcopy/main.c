@@ -347,7 +347,23 @@ static char *check(const char *src) {
 
 errexit:
 	free(rsrc);
-	fprintf(stderr, "Error fcopy: invalid ownership for file %s\n", src);
+	char *rpath = realpath(src, NULL);
+	if (!rpath)
+		fprintf(stderr, "Warning fcopy: realpath: %s\n", strerror(errno));
+
+	uid_t src_uid = 0;
+	char *src_username = NULL;
+	struct passwd *p2 = getpwuid(s.st_uid);
+	if (p2) {
+		src_uid = p2->pw_uid;
+		src_username = p2->pw_name;
+	}
+	else {
+		fprintf(stderr, "Warning fcopy: getpwuid: %s\n", strerror(errno));
+	}
+
+	fprintf(stderr, "Error fcopy: invalid ownership for file %s, realpath %s (uid=%lu name=%s)\n",
+	        src, rpath, (unsigned long)src_uid, src_username);
 	exit(1);
 }
 
