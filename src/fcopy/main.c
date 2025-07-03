@@ -352,6 +352,12 @@ static char *check(const char *src) {
 		if (s.st_uid != user && s.st_uid != p->pw_uid)
 			goto errexit;
 	}
+	// Some system paths may be owned by "runner:root" on GitHub runner
+	// images (see #6797).
+	else if (user == 0 && strncmp(src_username, "runner", 6) == 0) {
+		fprintf(stderr, "Warning fcopy: ignoring path for CI: %s -> %s (uid=%lu name=%s)\n",
+		        src, rsrc, (unsigned long)src_uid, src_username);
+	}
 	else {
 		if (s.st_uid != user)
 			goto errexit;
