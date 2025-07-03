@@ -319,10 +319,26 @@ out:
 
 
 static char *check(const char *src) {
+	uid_t src_uid = 0;
+	char *src_username = NULL;
+
 	struct stat s;
 	char *rsrc = realpath(src, NULL);
-	if (!rsrc || stat(rsrc, &s) == -1)
-		goto errexit;
+	if (!rsrc) {
+		fprintf(stderr, "Error fcopy: realpath %s\n", src);
+		errExit("realpath");
+	}
+	if (stat(rsrc, &s) == -1) {
+		fprintf(stderr, "Error fcopy: stat %s -> %s\n", src, rsrc);
+		errExit("stat");
+	}
+	struct passwd *src_pw = getpwuid(s.st_uid);
+	if (!src_pw) {
+		fprintf(stderr, "Error fcopy: getpwuid %s -> %s\n", src, rsrc);
+		errExit("getpwuid");
+	}
+	src_uid = src_pw->pw_uid;
+	src_username = strdup(src_pw->pw_name);
 
 	// on systems with systemd-resolved installed /etc/resolve.conf is a symlink to
 	//    /run/systemd/resolve/resolv.conf; this file is owned by systemd-resolve user
@@ -342,28 +358,14 @@ static char *check(const char *src) {
 	}
 
 	// dir, link, regular file
-	if (S_ISDIR(s.st_mode) || S_ISREG(s.st_mode) || S_ISLNK(s.st_mode))
+	if (S_ISDIR(s.st_mode) || S_ISREG(s.st_mode) || S_ISLNK(s.st_mode)) {
+		free(src_username);
 		return rsrc;			  // normal exit from the function
+	}
 
 errexit:
-	free(rsrc);
-	char *rpath = realpath(src, NULL);
-	if (!rpath)
-		fprintf(stderr, "Warning fcopy: realpath: %s\n", strerror(errno));
-
-	uid_t src_uid = 0;
-	char *src_username = NULL;
-	struct passwd *p2 = getpwuid(s.st_uid);
-	if (p2) {
-		src_uid = p2->pw_uid;
-		src_username = p2->pw_name;
-	}
-	else {
-		fprintf(stderr, "Warning fcopy: getpwuid: %s\n", strerror(errno));
-	}
-
-	fprintf(stderr, "Error fcopy: invalid ownership for file %s, realpath %s (uid=%lu name=%s)\n",
-	        src, rpath, (unsigned long)src_uid, src_username);
+	fprintf(stderr, "Error fcopy: invalid ownership for file %s -> %s (uid=%lu name=%s)\n",
+	        src, rsrc, (unsigned long)src_uid, src_username);
 	exit(1);
 }
 
