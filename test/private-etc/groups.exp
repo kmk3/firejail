@@ -7,6 +7,28 @@ set timeout 10
 spawn $env(SHELL)
 match_max 100000
 
+# Print real file owners for debugging (see #6797)
+spawn getent passwd
+expect eof
+puts ""
+
+spawn getent group
+expect eof
+puts ""
+
+spawn ls -al /etc
+expect eof
+puts ""
+
+spawn ls -al \
+	/ \
+	/usr \
+	/usr/share \
+	/usr/share/zoneinfo \
+	/usr/share/zoneinfo/Etc
+expect eof
+puts ""
+
 send -- "firejail --private-etc ls -l /etc\r"
 expect {
 	timeout {puts "TESTING ERROR 0\n";exit}
