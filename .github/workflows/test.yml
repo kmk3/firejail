@@ -112,6 +112,8 @@ jobs:
 #          packages.microsoft.com:443
 #          ppa.launchpadcontent.net:443
     - run: ls -al / /usr /usr/share /usr/share/zoneinfo /usr/share/zoneinfo/Etc
+    - run: getfacl /usr/share /opt
+    - run: mount
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
     - name: update package information
       run: sudo apt-get update -qy
