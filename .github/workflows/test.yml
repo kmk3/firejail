@@ -102,15 +102,16 @@ jobs:
     env:
       SHELL: /bin/bash
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0
-      with:
-        egress-policy: block
-        allowed-endpoints: >
-          azure.archive.ubuntu.com:80
-          github.com:443
-          packages.microsoft.com:443
-          ppa.launchpadcontent.net:443
+#    - name: Harden Runner
+#      uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0
+#      with:
+#        egress-policy: block
+#        allowed-endpoints: >
+#          azure.archive.ubuntu.com:80
+#          github.com:443
+#          packages.microsoft.com:443
+#          ppa.launchpadcontent.net:443
+    - run: ls -al / /usr /usr/share /usr/share/zoneinfo /usr/share/zoneinfo/Etc
     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
     - name: update package information
       run: sudo apt-get update -qy
