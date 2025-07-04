@@ -339,6 +339,8 @@ static char *check(const char *src) {
 	}
 	src_uid = src_pw->pw_uid;
 	src_username = strdup(src_pw->pw_name);
+	if (!src_username)
+		errExit("strdup");
 
 	// on systems with systemd-resolved installed /etc/resolve.conf is a symlink to
 	//    /run/systemd/resolve/resolv.conf; this file is owned by systemd-resolve user
