@@ -234,10 +234,56 @@ char *expand_macros(const char *path) {
 			errExit("asprintf");
 		goto out;
 	}
-	else {
-		char *directory = resolve_macro(path);
+	// XDG macros
+	else if (strncmp(path, "${DESKTOP}", 10) == 0) {
+		char *directory = resolve_macro("${DESKTOP}");
 		if (directory) {
-			if (asprintf(&rv, "%s/%s", cfg.homedir, directory) == -1)
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 10) == -1)
+				errExit("asprintf");
+			free(directory);
+			goto out;
+		}
+	}
+	else if (strncmp(path, "${DOCUMENTS}", 12) == 0) {
+		char *directory = resolve_macro("${DOCUMENTS}");
+		if (directory) {
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 12) == -1)
+				errExit("asprintf");
+			free(directory);
+			goto out;
+		}
+	}
+	else if (strncmp(path, "${DOWNLOADS}", 12) == 0) {
+		char *directory = resolve_macro("${DOWNLOADS}");
+		if (directory) {
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 12) == -1)
+				errExit("asprintf");
+			free(directory);
+			goto out;
+		}
+	}
+	else if (strncmp(path, "${MUSIC}", 8) == 0) {
+		char *directory = resolve_macro("${MUSIC}");
+		if (directory) {
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 8) == -1)
+				errExit("asprintf");
+			free(directory);
+			goto out;
+		}
+	}
+	else if (strncmp(path, "${PICTURES}", 11) == 0) {
+		char *directory = resolve_macro("${PICTURES}");
+		if (directory) {
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 11) == -1)
+				errExit("asprintf");
+			free(directory);
+			goto out;
+		}
+	}
+	else if (strncmp(path, "${VIDEOS}", 9) == 0) {
+		char *directory = resolve_macro("${VIDEOS}");
+		if (directory) {
+			if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + 9) == -1)
 				errExit("asprintf");
 			free(directory);
 			goto out;
@@ -266,11 +312,19 @@ void invalid_filename(const char *fname, int globbing) {
 		ptr = fname + 7;
 	else if (strncmp(ptr, "${RUNUSER}", 10) == 0)
 		ptr = fname + 10;
-	else {
-		int id = macro_id(fname);
-		if (id != -1)
-			return;
-	}
+	// XDG macros
+	else if (strncmp(ptr, "${DESKTOP}", 10) == 0)
+		ptr = fname + 10;
+	else if (strncmp(ptr, "${DOCUMENTS}", 12) == 0)
+		ptr = fname + 12;
+	else if (strncmp(ptr, "${DOWNLOADS}", 12) == 0)
+		ptr = fname + 12;
+	else if (strncmp(ptr, "${MUSIC}", 8) == 0)
+		ptr = fname + 8;
+	else if (strncmp(ptr, "${PICTURES}", 11) == 0)
+		ptr = fname + 11;
+	else if (strncmp(ptr, "${VIDEOS}", 9) == 0)
+		ptr = fname + 9;
 
 	reject_meta_chars(ptr, globbing);
 }
