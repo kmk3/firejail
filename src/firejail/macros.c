@@ -71,10 +71,11 @@ Macro macro[] = {
 };
 
 // return -1 if not found
-int macro_id(const char *name) {
+int macro_id(const char *path) {
 	int i = 0;
 	while (macro[i].name != NULL) {
-		if (strcmp(name, macro[i].name) == 0)
+		size_t len = strlen(macro[i].name);
+		if (strncmp(path, macro[i].name, len) == 0)
 			return i;
 		i++;
 	}
@@ -82,12 +83,12 @@ int macro_id(const char *name) {
 	return -1;
 }
 
-int is_macro(const char *name) {
-	assert(name);
-	int len = strlen(name);
+int is_macro(const char *path) {
+	assert(path);
+	int len = strlen(path);
 	if (len <= 4)
 		return 0;
-	if (*name == '$' && name[1] == '{' && name[len - 1] == '}')
+	if (*path == '$' && path[1] == '{' && strchr(&path[2], '}'))
 		return 1;
 	return 0;
 }
@@ -175,17 +176,25 @@ static char *resolve_hardcoded(char *entries[]) {
 }
 
 // returns mallocated memory
-char *resolve_macro(const char *name) {
+char *resolve_macro(const char *path) {
 	char *rv = NULL;
-	int id = macro_id(name);
+	int id = macro_id(path);
 	if (id == -1)
 		return NULL;
 
-	rv = resolve_xdg(macro[id].xdg);
-	if (rv == NULL)
-		rv = resolve_hardcoded(macro[id].translation);
+	char *directory = resolve_xdg(macro[id].xdg);
+	if (!directory)
+		directory = resolve_hardcoded(macro[id].translation);
+	if (!directory)
+		return NULL;
+
+	size_t len = strlen(macro[id].name);
+	if (asprintf(&rv, "%s/%s%s", cfg.homedir, directory, path + len) == -1)
+		errExit("asprintf");
+	free(directory);
+
 	if (rv && arg_debug)
-		printf("Directory %s resolved as %s\n", name, rv);
+		printf("Path %s resolved as %s\n", path, rv);
 
 	return rv;
 }
@@ -235,13 +244,9 @@ char *expand_macros(const char *path) {
 		goto out;
 	}
 	else {
-		char *directory = resolve_macro(path);
-		if (directory) {
-			if (asprintf(&rv, "%s/%s", cfg.homedir, directory) == -1)
-				errExit("asprintf");
-			free(directory);
+		rv = resolve_macro(path);
+		if (rv)
 			goto out;
-		}
 	}
 
 	assert(rv == NULL);
@@ -269,7 +274,7 @@ void invalid_filename(const char *fname, int globbing) {
 	else {
 		int id = macro_id(fname);
 		if (id != -1)
-			return;
+			ptr = fname + strlen(macro[id].name);
 	}
 
 	reject_meta_chars(ptr, globbing);
