@@ -6,13 +6,13 @@ include keepassxc.local
 # Persistent global definitions
 include globals.local
 
+noblacklist ${DOCUMENTS}
 noblacklist ${HOME}/*.kdb
 noblacklist ${HOME}/*.kdbx
 noblacklist ${HOME}/.cache/keepassxc
-noblacklist ${HOME}/.config/keepassxc
 noblacklist ${HOME}/.config/KeePassXCrc
+noblacklist ${HOME}/.config/keepassxc
 noblacklist ${HOME}/.keepassxc
-noblacklist ${DOCUMENTS}
 noblacklist ${RUNUSER}/app
 noblacklist ${RUNUSER}/openssh_agent
 noblacklist /tmp/ssh-*
