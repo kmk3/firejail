@@ -16,18 +16,18 @@ ignore dbus-system none
 # If you use such a system, add 'ignore nogroups' to your zoom.local.
 #ignore nogroups
 
+noblacklist ${DOCUMENTS}
 noblacklist ${HOME}/.config/zoom.conf
 noblacklist ${HOME}/.config/zoomus.conf
 noblacklist ${HOME}/.zoom
-noblacklist ${DOCUMENTS}
 
 nowhitelist ${DOWNLOADS}
 
 mkdir ${HOME}/.cache/zoom
-mkfile ${HOME}/.config/zoom.conf
-mkfile ${HOME}/.config/zoomus.conf
 mkdir ${HOME}/.zoom
 mkdir ${HOME}/Documents/Zoom
+mkfile ${HOME}/.config/zoom.conf
+mkfile ${HOME}/.config/zoomus.conf
 whitelist ${HOME}/.cache/zoom
 whitelist ${HOME}/.config/zoom.conf
 whitelist ${HOME}/.config/zoomus.conf
