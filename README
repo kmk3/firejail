@@ -162,6 +162,7 @@ Amin Vakil (https://github.com/aminvakil)
 	- w3m profile fix
 	- disable seccomp in wireshark profile
 	- new profile: gemini (#6936)
+	- new profile: opencode (#7135)
 Ammon Smith (https://github.com/ammongit)
 	- Add DBus filter rules specific to firefox-developer-edition
 Andreas Hunkeler (https://github.com/Karneades)
