@@ -8,6 +8,8 @@ firejail (0.9.81) baseline; urgency=low
   * build: merge fnettrace headers into `fnettrace_common.h` (#7127)
   * build: remove unused `remove_cnt` variable in src/fsec-optimize/optimizer.c
     (156593d)
+  * build: gen-syscalls.sh: remove trailing spaces in `new_syscalls.txt`
+    (4a5ed83)
   * profiles: disable-programs: add lact paths (#7083)
   * profiles: disable-exec: add mount paths (#7112)
   * profiles: mumble: include whitelist-runuser-common (#7084)
