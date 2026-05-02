@@ -1,6 +1,7 @@
 firejail (0.9.81) baseline; urgency=low
   * work in progress
   * modif: create a new syscall group: `@program-keep` (9d90daf)
+  * modif: stop following symlinks to /dev/null on disable (#5803 #7129)
   * docs: man: fix typo in example (#7106)
   * docs: recommend .deb or building from source on debian/ubuntu (#7110)
   * build: fix empty lists in syscall.c breaking compilation (#7108 #7109)
@@ -10,10 +11,12 @@ firejail (0.9.81) baseline; urgency=low
     (156593d)
   * build: gen-syscalls.sh: remove trailing spaces in `new_syscalls.txt`
     (4a5ed83)
+  * build: deb: add conflict with firejail-profiles (#7141)
   * profiles: disable-programs: add lact paths (#7083)
   * profiles: disable-exec: add mount paths (#7112)
   * profiles: mumble: include whitelist-runuser-common (#7084)
   * profiles: disable-common: add xfce clipman path (#7120)
+  * profiles: steam: allow ~/.cache/nvidia to improve game performance (#7114)
   * new profile: gemini (#6936)
   * new profile: opencode (#7135)
   * new profile: pi (#7136)

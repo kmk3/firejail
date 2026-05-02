@@ -92,6 +92,9 @@ Firejail Authors (alphabetical order):
 a1346054 (https://github.com/a1346054)
 	- add missing final newlines in various files
 	- Remove deprecated syntax and modernize shell test scripts
+acuifex (https://github.com/acuifex)
+	- profiles: steam: allow ~/.cache/nvidia to improve game performance
+	  (#7114)
 Ádler Jonas Gross (https://github.com/adgross)
 	- AppArmor fix
 Adrian L. Shaw (https://github.com/adrianlshaw)
