@@ -309,6 +309,9 @@ cayday (https://github.com/caydey)
 celenityy (https://github.com/celenityy)
 	- Thunderbird profile fix
 	- wget profile fix
+Charly Coste (https://github.com/Changaco)
+	- security: create `~/.config/firejail` to prevent sandbox escape
+	  (#7154)
 Christian Pinedo (https://github.com/chrpinedo)
 	- added nicotine profile
 	- allow python3 in totem profile
@@ -329,6 +332,7 @@ Clayton Williams (https://github.com/gosre)
 cobratbq (https://github.com/cobratbq)
 	- tor profile: add memory-deny-write-execute
 	- torbrowser-launcher fixes
+	- profiles: torbrowser-launcher: add no3d (#7143)
 CodeWithMa (https://github.com/CodeWithMa)
 	- mpv.profile: add new XDG_STATE_HOME path
 corecontingency (https://https://github.com/corecontingency)
@@ -1323,6 +1327,7 @@ StellariusOrion592 (https://github.com/StellariusOrion592)
 	- new profile: openra (#7005)
 	- new profile: gzdoom, lzdoom, uzdoom (#7010)
 	- new profile: quakespasm (#7014)
+	- new profile: ephoto (#7153)
 StelFux (https://github.com/StelFux)
 	- Fix youtube video in totem
 sudoAlphaX (https://github.com/sudoAlphaX)
@@ -1472,6 +1477,9 @@ Vladislav Nepogodin (https://github.com/vnepogodin)
 	- CachyBrowser profile
 weebnix (https://github.com/weebnix)
 	- block /dev/ntsync & add keep-dev-ntsync command
+wladmis (https://github.com/wladmis)
+	- profiles: firefox-common: allow auto light/dark theme switching
+	  (#7103)
 Hugo Osvaldo Barrera (https://github.com/WhyNotHugo)
 	- Skype profile tweaks
 	- whitelist-ro command
