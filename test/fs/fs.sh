@@ -8,7 +8,12 @@ export MALLOC_PERTURB_=$(($RANDOM % 255 + 1))
 export LC_ALL=C
 
 # These directories are required by some tests:
-mkdir -p ~/Desktop ~/Documents ~/Downloads ~/Music ~/Pictures ~/Videos
+mkdir -p ~/Desktop
+mkdir -p ~/Documents
+mkdir -p ~/Downloads
+mkdir -p ~/Music
+mkdir -p ~/Pictures
+mkdir -p ~/Videos
 
 echo "TESTING: tmpfs as regular user (test/fs/tmpfs.exp)"
 ./tmpfs.exp
