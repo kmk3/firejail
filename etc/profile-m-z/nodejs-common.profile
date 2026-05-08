@@ -52,11 +52,11 @@ include disable-xdg.inc
 #mkdir ${HOME}/.node-gyp
 #mkdir ${HOME}/.npm
 #mkdir ${HOME}/.npm-packages
-#mkfile ${HOME}/.npmrc
 #mkdir ${HOME}/.nvm
 #mkdir ${HOME}/.yarn
 #mkdir ${HOME}/.yarn-config
 #mkdir ${HOME}/.yarncache
+#mkfile ${HOME}/.npmrc
 #mkfile ${HOME}/.yarnrc
 #whitelist ${HOME}/.local/share/pnpm
 #whitelist ${HOME}/.node-gyp
