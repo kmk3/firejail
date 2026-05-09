@@ -43,10 +43,10 @@
 #  ${DOCUMENTS}
 #  ${DOWNLOADS}
 #  ${HOME} (user's home)
+#  ${MUSIC}
 #  ${PATH} (contents of PATH env var)
 #  ${PICTURES}
 #  ${PROJECTS}
-#  ${MUSIC}
 #  ${RUNUSER} (/run/user/UID)
 #  ${VIDEOS}
 #
