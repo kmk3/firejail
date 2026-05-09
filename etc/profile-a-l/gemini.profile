@@ -18,4 +18,4 @@ noblacklist ${HOME}/.gemini
 #include whitelist-common.inc
 
 # Redirect
-include llm-agent-common.inc
+include llm-agent-common.profile

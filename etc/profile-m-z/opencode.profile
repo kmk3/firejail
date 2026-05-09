@@ -28,4 +28,4 @@ noblacklist ${HOME}/.local/state/opencode
 apparmor
 
 # Redirect
-include llm-agent-common.inc
+include llm-agent-common.profile
