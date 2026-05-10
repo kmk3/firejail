@@ -8,7 +8,7 @@ spawn $env(SHELL)
 match_max 100000
 
 # Test that macros work with subpaths (see #2359).
-send -- "firejail --profile=./macro-subpath-whitelist.profile ls \
+send -- "firejail --profile=./macro-subpath-whitelist.profile find \
 	~/Desktop/_firejail_test_dir \
 	~/Documents/_firejail_test_dir \
 	~/Downloads/_firejail_test_dir \
@@ -16,6 +16,7 @@ send -- "firejail --profile=./macro-subpath-whitelist.profile ls \
 	~/Pictures/_firejail_test_dir \
 	~/Projects/_firejail_test_dir \
 	~/Videos/_firejail_test_dir \
+	| LC_ALL=C sort
 \r"
 
 expect {
