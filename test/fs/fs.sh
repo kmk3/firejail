@@ -19,7 +19,7 @@ mkdir -p ~/Videos
 echo "TESTING: tmpfs as regular user (test/fs/tmpfs.exp)"
 ./tmpfs.exp
 
-echo "TESTING: tmpfs as rooot (test/fs/tmpfs-root.exp)"
+echo "TESTING: tmpfs as root (test/fs/tmpfs-root.exp)"
 sudo ./tmpfs-root.exp
 
 echo "TESTING: tab completion (test/fs/tab.exp)"
