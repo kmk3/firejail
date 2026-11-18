@@ -42,7 +42,7 @@ permissions:  # added using https://github.com/step-security/secure-workflows
 
 jobs:
   scan-build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
     - name: Harden Runner
@@ -75,7 +75,7 @@ jobs:
       run: scan-build-18 make -j "$(nproc)" -Orecurse
 
   cppcheck:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
     - name: Harden Runner
